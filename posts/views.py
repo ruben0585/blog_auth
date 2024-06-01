@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, permissions
 from .models import Publication
 from .serializers import PublicationSerializer
 
@@ -9,5 +9,6 @@ class PublicationList(generics.ListCreateAPIView):
     serializer_class = PublicationSerializer
 
 class PublicationDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAdminUser,)
     queryset = Publication.objects.all()
     serializer_class = PublicationSerializer
